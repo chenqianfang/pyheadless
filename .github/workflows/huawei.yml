@@ -1,8 +1,8 @@
 name: HuaWei
 
 on:
-  push:
-    branches: [ master ]
+  #push:
+  #  branches: [ master ]
   schedule:
     - cron: '20 0,2 * * *'
 
@@ -27,3 +27,7 @@ jobs:
     - name: Run HUAWEI yufei
       run: |
         python3 main.py --client huawei --username ${{ secrets.CAOYUFEI_USERNAME }} --password ${{ secrets.CAOYUFEI_PASSWORD }} --git-url ${{ secrets.CAOYUFEI_GIT }}
+        
+    - name: Run HUAWEI yufei
+      run: |
+        python3 main.py --client huawei --username ${{ secrets.CAOYUFEI_USERNAME1 }} --password ${{ secrets.CAOYUFEI_PASSWORD1 }} --git-url ${{ secrets.CAOYUFEI_GIT1 }}
