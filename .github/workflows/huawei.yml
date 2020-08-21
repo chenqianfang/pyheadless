@@ -34,3 +34,7 @@ jobs:
     - name: Run HUAWEI yufei
       run: |
         python3 main.py --client huawei --username ${{ secrets.CAOYUFEI_USERNAME2 }} --password ${{ secrets.CAOYUFEI_PASSWORD2 }} --git-url ${{ secrets.CAOYUFEI_GIT2 }}
+        
+    - name: Run HUAWEI yufei
+      run: |
+        python3 main.py --client huawei --username ${{ secrets.CAOYUFEI_USERNAME3 }} --password ${{ secrets.CAOYUFEI_PASSWORD3 }} --git-url ${{ secrets.CAOYUFEI_GIT3 }}
