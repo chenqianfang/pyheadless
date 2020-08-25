@@ -1,7 +1,7 @@
 import asyncio
 
-from libs.base_huawei import BaseHuaWei
 
+from libs.base_huawei import BaseHuaWei
 
 class HuaWei(BaseHuaWei):
 
