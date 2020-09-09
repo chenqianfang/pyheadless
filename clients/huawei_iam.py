@@ -18,69 +18,24 @@ class HuaWeiIam(BaseHuaWei):
 
         await self.page.waitForSelector('#IAMAccountInputId .tiny-input-text', {'visible': True})
 
-        await self.page.type('#IAMAccountInputId .tiny-input-text', 'hw69847864')
+        parent_user = 'caoyufei' if username.find('yufei') != -1 else 'atzouhua'
+        await self.page.type('#IAMAccountInputId .tiny-input-text', parent_user)
         await self.page.type('#IAMUsernameInputId .tiny-input-text', username)
+        await asyncio.sleep(0.5)
         await self.page.type('#IAMPasswordInputId .tiny-input-text', password)
         await self.page.click('#loginBtn #btn_submit')
-        await asyncio.sleep(6)
+        await asyncio.sleep(5)
 
         await self.sign_task()
 
-        await self.experience(**kwargs)
+        await self.delete_project()
+        await self.delete_api()
+        await self.delete_api_group()
+
+        await self.start(**kwargs)
+
+        await self.regular()
 
         await self.print_credit(username)
 
         await asyncio.sleep(1)
-
-    async def new_project(self):
-        try:
-            new_page = await self.get_new_page()
-            await new_page.waitForSelector('.modal.in', {'visible': True})
-            await new_page.click('.modal.in .devui-btn:nth-child(1)')
-            await asyncio.sleep(5)
-            await new_page.close()
-        except Exception as e:
-            self.logger.warning(e)
-        finally:
-            await self.close_page()
-
-    async def new_test(self):
-        try:
-            new_page = await self.get_new_page()
-            await asyncio.sleep(2)
-            await new_page.click('#global-guidelines .icon-close')
-            await asyncio.sleep(1)
-            await new_page.click('.guide-container .icon-close')
-            await asyncio.sleep(1)
-            await new_page.waitForSelector('div.create-case', {'visible': True})
-            await new_page.click('div.create-case')
-            await asyncio.sleep(5)
-            await new_page.type('#caseName', ''.join(random.choices(string.ascii_letters, k=6)))
-            await new_page.click('div.footer .devui-btn-stress')
-            await asyncio.sleep(5)
-            await new_page.close()
-        except Exception as e:
-            self.logger.warning(e)
-        finally:
-            await self.close_page()
-
-    async def new_api_test(self):
-        try:
-            new_page = await self.get_new_page()
-            await asyncio.sleep(2)
-            await new_page.click('#global-guidelines .icon-close')
-            await asyncio.sleep(1)
-            await new_page.click('.guide-container .icon-close')
-            await asyncio.sleep(1)
-            await new_page.click('#testtype_1')
-            await new_page.waitForSelector('div.create-case', {'visible': True})
-            await new_page.click('div.create-case')
-            await asyncio.sleep(5)
-            await new_page.type('#caseName', ''.join(random.choices(string.ascii_letters, k=6)))
-            await new_page.click('div.footer .devui-btn-stress')
-            await asyncio.sleep(5)
-            await new_page.close()
-        except Exception as e:
-            self.logger.warning(e)
-        finally:
-            await self.close_page()
