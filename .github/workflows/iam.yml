@@ -6,9 +6,6 @@ on:
   schedule:
     - cron: '50 0,2 * * *'
 
-env:
-  DING_TOKEN: ${{ secrets.DING_TOKEN }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
